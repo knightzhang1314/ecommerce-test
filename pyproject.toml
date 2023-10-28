@@ -23,6 +23,14 @@ content-type = "text/markdown"
 [project.urls]
 homepage = "https://github.com/knightzhang1314/ecommerce-test"
 
+[tool.setuptools]
+include-package-data = true
+package-dir = {"" = "src"}
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+# automatically find packages
 [tool.setuptools.packages.find]
 where = ["src"]
 namespaces = true
