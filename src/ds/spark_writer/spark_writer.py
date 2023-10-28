@@ -14,7 +14,7 @@ class SparkWriter(BaseWriter):
 
     def write(self) -> None:
         df = self._spark.createDataFrame(self._df)
-        writer = df.write.mode("overwrite")
+        writer = df.write.mode("overwrite").format("parquet")
         if self._partition:
             writer = writer.partitionBy(self._partition)
         writer.saveAsTable(self._target_table)
