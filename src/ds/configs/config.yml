@@ -1,0 +1,14 @@
+source_tables:
+  products:
+    view_name: "products"
+  order_items:
+    view_name: "order_items"
+  order_payments:
+    view_name: "order_payments"
+  orders:
+    view_name: "orders"
+
+target_tables:
+   sales:
+     view_name: "sales"
+     partition: "product_category_name"
