@@ -1,0 +1,43 @@
+name: Python Code Sanity Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  check:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4.6.0
+      with:
+        python-version: 3.9
+
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install --upgrade setuptools setuptools-scm[toml]
+
+    - name: Flake8 check
+      run: |
+        flake8 .
+
+    - name: Analysing the code with isort
+      run: |
+        isort . --check-only --diff
+
+    - name: Analysing the code with black
+      run: |
+        black . --check --diff
+
+    - name: Run all tests with coverage
+      id: run-pytest-cov
+      run: |
+        python -m pytest -v -ss --cov --cov-branch -rs .
