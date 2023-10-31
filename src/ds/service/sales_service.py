@@ -14,8 +14,11 @@ from ds.utils.spark import create_spark_session
 
 
 class SalesService(BaseService):
+    def __init__(self, platform: Platform):
+        self.configs = platform.configs
+
     def run(self) -> None:
-        configs = Platform().configs
+        configs = self.configs
         spark = create_spark_session()
         order = OrdersLoader(configs, spark).load().df
         order_items = OrderItemsLoader(configs, spark).load().df

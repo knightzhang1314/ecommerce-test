@@ -1,3 +1,4 @@
+from ds.core.platform import Platform
 from ds.schema.order_items import OrderItemObject
 from ds.schema.order_payments import OrderPaymentsObject
 from ds.schema.orders import OrderObject
@@ -13,7 +14,8 @@ def test_merge_sales(
     order_payments: OrderPaymentsObject,
     sales: SalesObject,
 ) -> None:
-    service = SalesService()
+    platform = Platform()
+    service = SalesService(platform)
     sale_obj = service._merge_sales(
         orders.df, order_items.df, order_payments.df, product.df
     )

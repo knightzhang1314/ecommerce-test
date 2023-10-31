@@ -20,6 +20,6 @@ class TargetTableInfo(BaseModel):
 
 
 class ConfigModel(BaseModel):
-    country_name: str
+    country_name: str = Field(default="")
     source_tables: SourceTableInfo
     target_tables: TargetTableInfo
