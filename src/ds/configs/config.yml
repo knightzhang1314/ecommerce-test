@@ -1,12 +1,20 @@
 source_tables:
   products:
     view_name: "products"
+    url: "data/olist_products_dataset.csv"
+    type: "local"
   order_items:
     view_name: "order_items"
+    url: "data/olist_order_items_dataset.csv"
+    type: "local"
   order_payments:
     view_name: "order_payments"
+    url: "data/olist_order_payments_dataset.csv"
+    type: "local"
   orders:
     view_name: "orders"
+    url: "data/olist_orders_dataset.csv"
+    type: "local"
 
 target_tables:
    sales:

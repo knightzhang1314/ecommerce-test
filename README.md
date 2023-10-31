@@ -40,6 +40,8 @@ $ cd src
 $ python entrypoint.py
 ```
 
+#### How to run in notebook, you can check the [notebook](https://github.com/knightzhang1314/ecommerce-test/blob/dev/notebook/sales_predict.ipynb)
+
 
 #### How to deploy the package
 

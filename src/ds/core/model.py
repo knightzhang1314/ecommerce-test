@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from pydantic import BaseModel, Field
 
 
@@ -21,5 +23,6 @@ class TargetTableInfo(BaseModel):
 
 class ConfigModel(BaseModel):
     country_name: str = Field(default="")
+    root_path: Path = Field(default="")
     source_tables: SourceTableInfo
     target_tables: TargetTableInfo
