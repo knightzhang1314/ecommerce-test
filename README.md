@@ -40,6 +40,8 @@ $ cd src
 $ python entrypoint.py
 ```
 
+#### How to run in notebook, you can check the [notebook]()
+
 
 #### How to deploy the package
 

@@ -1,4 +1,5 @@
 from functools import reduce
+from typing import Optional
 
 import pandas as pd
 
@@ -14,10 +15,10 @@ from ds.utils.spark import create_spark_session
 
 
 class SalesService(BaseService):
-    def __init__(self, platform: Platform):
-        self.configs = platform.configs
+    def __init__(self, platform: Optional[Platform] = None):
+        self.configs = platform.configs if platform else Platform().configs
 
-    def run(self) -> None:
+    def run(self) -> SalesObject:
         configs = self.configs
         spark = create_spark_session()
         order = OrdersLoader(configs, spark).load().df
@@ -26,6 +27,7 @@ class SalesService(BaseService):
         product = ProductLoader(configs, spark).load().df
         sales = self._merge_sales(order, order_items, order_payments, product).df
         SparkWriter(spark, sales, configs).write()
+        return SalesObject(sales)
 
     def _merge_sales(
         self,
@@ -37,4 +39,19 @@ class SalesService(BaseService):
         dfs = [order, order_items, order_payments]
         orders = reduce(lambda left, right: pd.merge(left, right, on="order_id"), dfs)
         sales = pd.merge(orders, product, on="product_id")
+        return SalesObject(sales)
+
+
+class LocalSalesService(SalesService):
+    def __init__(self, platform: Optional[Platform] = None):
+        super().__init__(platform)
+        self.configs = platform.configs if platform else Platform().configs
+
+    def run(self) -> SalesObject:
+        configs = self.configs
+        order = OrdersLoader(configs).load().df
+        order_items = OrderItemsLoader(configs).load().df
+        order_payments = OrderPaymentsLoader(configs).load().df
+        product = ProductLoader(configs).load().df
+        sales = self._merge_sales(order, order_items, order_payments, product).df
         return SalesObject(sales)

@@ -15,9 +15,12 @@ class Platform:
     @property
     def configs(self) -> ConfigModel:
         config_name = "config.yml"
-        config_path = Path(__file__).resolve().parent.parent.joinpath("configs")
+        proj_path = Path(__file__).resolve().parent.parent
+        root_path = proj_path.parent.parent
+        config_path = proj_path.joinpath("configs")
         config = config_path.joinpath(config_name)
         source_config = self._read_yaml(str(config))
+        source_config["root_path"] = root_path
         scope_config = {}
         if self._scope:
             scope_config_name = f"config-{self._scope}.yml"
