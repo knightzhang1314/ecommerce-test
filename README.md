@@ -11,6 +11,23 @@
 ```
 $ pip install ds-(version)-py3-none-any.whl
 ```
+### Final table structure
+
+column name | type | describe | sample
+--- | --- | --- | ---
+order_id | STRING | Unique identifier for the order | "8272b63d03f5f79c56e9e4120aec44ef"
+order_item_id | INT | Sequential number identifying the order item | 1
+product_id | STRING | Unique identifier for the product | "50ba38c4dc467baab1ea2c8c7747934d"
+product_category_name | STRING | Name of the product category | "perfumery"
+payment_value | DOUBLE | Value of the payment for the order | 124.90
+payment_type | STRING | Payment method used for the order | "credit_card"
+customer_id | STRING | Unique identifier for the customer | "b7aafc6ed8380bb86f57c1a4606fccc7"
+order_status | STRING | Current status of the order | "delivered"
+order_purchase_timestamp | TIMESTAMP | Date and time when the order was made | "2017-02-13 22:07:15"
+order_approved_at | TIMESTAMP | Date and time when the order was approved by the seller | "2017-02-13 22:22:46"
+order_delivered_carrier_date | TIMESTAMP | Date and time when the carrier received the order | "2017-03-09 14:17:59"
+order_delivered_customer_date | TIMESTAMP | Date and time when the order was delivered to the customer | "2017-03-16 13:19:19"
+order_estimated_delivery_date | TIMESTAMP | Estimated date when the order was supposed to be delivered | "2017-03-21 00:00:00"
 
 ### For Developers
 
