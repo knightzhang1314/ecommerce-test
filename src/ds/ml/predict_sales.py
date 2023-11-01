@@ -13,7 +13,7 @@ from ds.schema.sales import SalesObject
 
 
 def preprocessing(sales: SalesObject) -> pd.DataFrame:
-    df = sales.df[["order_purchase_timestamp", "product_id", "price", "order_item_id"]]
+    df = sales.df[["order_purchase_timestamp", "product_id", "sales", "order_item_id"]]
 
     # group sales by product and week
     df["order_purchase_timestamp"] = pd.to_datetime(df["order_purchase_timestamp"])
@@ -24,9 +24,8 @@ def preprocessing(sales: SalesObject) -> pd.DataFrame:
 
 
 def resample(grouped_sales: pd.DataFrame) -> pd.DataFrame:
-    grouped_sales = grouped_sales.reset_index()
     grouped_sales = grouped_sales.pivot(
-        index="order_purchase_timestamp", columns="product_id", values="price"
+        index="order_purchase_timestamp", columns="product_id", values="sales"
     )
     grouped_sales = grouped_sales.resample("W").sum().fillna(0)
     return grouped_sales
