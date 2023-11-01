@@ -17,10 +17,8 @@ class SalesObject(BaseObject):
 
 
 class SalesSchema(BaseSchema):
-    order_id: Series[dtypes.String] = pa.Field(nullable=False)
-    product_id: Series[dtypes.String] = pa.Field(nullable=True)
-    product_category_name: Series[dtypes.String] = pa.Field(nullable=True)
-    payment_value: Series[dtypes.Float32] = pa.Field(nullable=True)
+    product_id: Series[dtypes.String] = pa.Field(nullable=False)
+    sales: Series[dtypes.Float32] = pa.Field(nullable=True)
     order_purchase_timestamp: Series[dtypes.Timestamp] = pa.Field(nullable=True)
 
     class Config:
