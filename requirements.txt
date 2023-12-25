@@ -17,7 +17,7 @@ cython<3.0
 # Code Check and test
 # ------------------
 flake8<=4.0.1
-coverage==6.2
+coverage==7.3.4
 pytest==7.4.3
 pytest-cov==3.0.0
 black==23.3.0
